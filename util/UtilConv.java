@@ -12,5 +12,9 @@ public class UtilConv {
 	public static int convToInnerRank(int intputRank) {
 		return 17 - (intputRank * 2);
 	}
+	
+	public static Point convToInnerCoord(int inputRank, int inputFile){
+		return new Point(convToInnerRank(inputRank), convToInnerFile(inputFile));
+	}
 
 }

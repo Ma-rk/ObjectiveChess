@@ -6,10 +6,9 @@ package pieces;
 
 import java.util.ArrayList;
 
-import board.ChessBoard;
-import util.EtcUtil;
-import util.PointPosition;
+import util.Point;
 import util.EtcUtil.Color;
+import util.UtilPoint;
 
 public class King extends Piece {
 
@@ -19,23 +18,22 @@ public class King extends Piece {
 	}
 
 	public String toString() {
-		return "King instance. file: " + (myPosition.getFile() + 1) / 2 + ", rank: " + (myPosition.getRank() + 17) / 2;
+		return "King instance. + Rank: " + (myPosition.getRank() + 17) / 2 + "File: " + (myPosition.getFile() + 1) / 2;
 
 	}
 
-	public ArrayList<PointPosition> getAvailablePoint() {
+	public ArrayList<Point> getAvailablePoint() {
 
-		pointsIWantToGo.add(new PointPosition(0, 2));
-		pointsIWantToGo.add(new PointPosition(2, 2));
-		pointsIWantToGo.add(new PointPosition(2, 0));
-		pointsIWantToGo.add(new PointPosition(2, -2));
-		pointsIWantToGo.add(new PointPosition(0, -2));
-		pointsIWantToGo.add(new PointPosition(-2, -2));
-		pointsIWantToGo.add(new PointPosition(-2, 0));
-		pointsIWantToGo.add(new PointPosition(-2, 2));
+		pointsIWantToGo.add(new Point(-2, 0));
+		pointsIWantToGo.add(new Point(-2, 2));
+		pointsIWantToGo.add(new Point(0, 2));
+		pointsIWantToGo.add(new Point(2, 2));
+		pointsIWantToGo.add(new Point(2, 0));
+		pointsIWantToGo.add(new Point(2, -2));
+		pointsIWantToGo.add(new Point(0, -2));
+		pointsIWantToGo.add(new Point(-2, -2));
+		ArrayList<Point> pointsICanGo = UtilPoint.getAvalablePoint(this, pointsIWantToGo);
 
-		ArrayList<PointPosition> pointsICanGo = EtcUtil.getAvalablePoint(this, pointsIWantToGo);
-		
 		return pointsICanGo;
 
 	}

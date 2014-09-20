@@ -6,40 +6,48 @@ package pieces;
 
 import java.util.ArrayList;
 
-import util.PointPosition;
+import util.Point;
 import util.EtcUtil.Color;
 
 public class Piece extends Tile {
 	private String image = null;
 
-	ArrayList<PointPosition> pointsIWantToGo = new ArrayList<PointPosition>();
-	ArrayList<PointPosition> pointsICanGo = new ArrayList<PointPosition>();
-	public PointPosition myPosition;
+	ArrayList<Point> pointsIWantToGo = new ArrayList<Point>();
+	ArrayList<Point> pointsICanGo = new ArrayList<Point>();
+	public Point myPosition;
 	public int moves = 0;
 	public Color color = Color.noColor;
 
 	public Piece(String image, Color color) {
 		super(image);
-		this.myPosition = new PointPosition(0, 0);
-		this.color = color;
-	}
-	public Piece(String image, Color color, int file, int rank) {
-		super(image);
-		this.myPosition = new PointPosition(file, rank);
+		this.myPosition = new Point(0, 0);
 		this.color = color;
 	}
 
-	public Piece setCurrentPosition(int file, int rank) {
-		Piece instanceWithNewPosition = new Piece(this.image, this.color, file, rank);
-		return instanceWithNewPosition; 
+	public Piece(String image, Color color, int rank, int file) {
+		super(image);
+		this.myPosition = new Point(rank, file);
+		this.color = color;
+	}
+
+	public void setCurrentPosition(int rank, int file) {
+		this.myPosition = new Point(rank, file);
+	}
+
+	public void setCurrentPosition(Point pos) {
+		this.myPosition = new Point(pos.getRank(), pos.getFile());
+	}
+	
+	public Point getCurrentPosition() {
+		return this.myPosition;
 	}
 
 	public String toString() {
-		return "Piece instance. File: " + (myPosition.getFile() + 1) / 2 + ", Rank: " + (myPosition.getRank() + 17) / 2;
+		return "Piece instance. Rank: " + (myPosition.getRank() + 17) / 2 + "File: " + (myPosition.getFile() + 1) / 2;
 
 	}
 
-	public ArrayList<PointPosition> getAvailablePoint() {
+	public ArrayList<Point> getAvailablePoint() {
 
 		// 널로 리턴하는게 맞나? 일단 구현은 자식 클래스에서 하니까 이대로 둬 보자...
 		return null;

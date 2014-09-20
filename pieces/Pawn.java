@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import board.ChessBoard;
 import util.EtcUtil.Color;
-import util.PointPosition;
+import util.Point;
 
 public class Pawn extends Piece {
 
@@ -17,25 +17,25 @@ public class Pawn extends Piece {
 	}
 
 	public String toString() {
-		return "Pawn instance. file: " + (myPosition.getFile() + 1) / 2 + ", rank: " + (myPosition.getRank() + 17) / 2;
+		return "Pawn instance. Rank: " + (myPosition.getRank() + 17) / 2 + ", File: " + (myPosition.getFile() + 1) / 2;
 
 	}
 
-	public ArrayList<PointPosition> getAvailablePoint() {
+	public ArrayList<Point> getAvailablePoint() {
 
-		ArrayList<PointPosition> availablePoints = new ArrayList<PointPosition>();
+		ArrayList<Point> availablePoints = new ArrayList<Point>();
 
 		if (color == Color.black) {
 			// 이 객체가 black일 때의 로직(위에서 아래로 공격하는 로직)
-			Tile tempTile = ChessBoard.chessBoard[myPosition.getFile() - 1][myPosition.getRank() - 1];
-			Piece targetPiece = (Piece) ChessBoard.chessBoard[myPosition.getFile() - 1][myPosition.getRank() - 1];
+			Tile tempTile = ChessBoard.chessBoard[myPosition.getRank() - 1][myPosition.getFile() - 1];
+			Piece targetPiece = (Piece) ChessBoard.chessBoard[myPosition.getRank() - 1][myPosition.getFile() - 1];
 			if (targetPiece.color == Color.white) {
-				availablePoints.add(new PointPosition(myPosition.getFile() - 1, myPosition.getRank() - 1));
+				availablePoints.add(new Point(myPosition.getRank() - 1, myPosition.getFile() - 1));
 			}
 			
-			targetPiece = (Piece) ChessBoard.chessBoard[myPosition.getFile() - 1][myPosition.getRank() + 1];
+			targetPiece = (Piece) ChessBoard.chessBoard[myPosition.getRank() + 1][myPosition.getFile() - 1];
 			if (targetPiece.color == Color.white) {
-				availablePoints.add(new PointPosition(myPosition.getFile() - 1, myPosition.getRank() + 1));
+				availablePoints.add(new Point(myPosition.getRank() + 1, myPosition.getFile() - 1));
 			}
 			// 이 객체가 black일 때의 로직(위에서 아래로 이동하는 로직)
 		} else {
