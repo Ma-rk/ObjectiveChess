@@ -7,7 +7,7 @@ package pieces;
 import java.util.ArrayList;
 
 import board.ChessBoard;
-import util.EtcUtil.Color;
+import util.UtilEtc.Color;
 import util.Point;
 
 public class Pawn extends Piece {

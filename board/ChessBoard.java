@@ -10,8 +10,8 @@ import pieces.King;
 import pieces.Pawn;
 import pieces.Piece;
 import pieces.Tile;
-import util.EtcUtil;
-import util.EtcUtil.PieceKind;
+import util.UtilEtc;
+import util.UtilEtc.PieceKind;
 import util.Point;
 import util.UtilConv;
 import util.UtilGetInput;
@@ -26,17 +26,16 @@ public class ChessBoard {
 	public static Tile tileBlack = new Tile("■");
 	public static Tile tileEmpty = new Tile("  ");
 
-	Pawn b_pawn1 = new Pawn(PieceKind.bPawn.getColor(), EtcUtil.Color.black);
-	Pawn b_pawn2 = new Pawn(PieceKind.bPawn.getColor(), EtcUtil.Color.black);
-	King bKing = new King(PieceKind.bKing.getColor(), EtcUtil.Color.black);
+	Pawn b_pawn1 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black);
+	Pawn b_pawn2 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black);
+	King bKing = new King(PieceKind.bKing.getColor(), UtilEtc.Color.black);
 
-	Pawn w_pawn1 = new Pawn(PieceKind.wPawn.getColor(), EtcUtil.Color.white);
-	Pawn w_pawn2 = new Pawn(PieceKind.wPawn.getColor(), EtcUtil.Color.white);
+	Pawn w_pawn1 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white);
+	Pawn w_pawn2 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white);
 
 	ArrayList<Point> pointsICanGo;
 	ArrayList<Piece> deadPieces = new ArrayList<Piece>();
-	
-	
+
 	public ChessBoard() {
 		initailizeBoard();
 	}
@@ -103,7 +102,11 @@ public class ChessBoard {
 			}
 			System.out.println();
 		}
-		System.out.println("    1   2   3   4   5   6   7   8 (가로)");
+		System.out.print("    1   2   3   4   5   6   7   8 (가로)    ");
+		for (int numOfDeadPieces = 0; numOfDeadPieces < deadPieces.size(); numOfDeadPieces++) {
+			System.out.print(deadPieces.get(numOfDeadPieces) + " ");
+		}
+		System.out.println();
 	}
 
 	public Piece pickPieceToMove() {
@@ -129,7 +132,7 @@ public class ChessBoard {
 	}
 
 	public void showAvailablePoint(Piece currentPiece) {
-		EtcUtil.printEnterPoint("showAvailablePoint");
+		UtilEtc.printEnterPoint("showAvailablePoint");
 		System.out.println(currentPiece.toString());
 
 		pointsICanGo = currentPiece.getAvailablePoint();
@@ -137,6 +140,24 @@ public class ChessBoard {
 	}
 
 	public void executeMove(Piece currentPiece, Point pointToMove) {
-		
+		UtilEtc.printEnterPoint("executeMove");
+		if (chessBoard[pointToMove.getRank()][pointToMove.getFile()].getClass() != Tile.class) {
+			deadPieces.add((Piece) chessBoard[pointToMove.getRank()][pointToMove.getFile()]);
+		}
+
+		chessBoard[currentPiece.getCurrentPosition().getRank()][currentPiece.getCurrentPosition().getFile()] = tileEmpty;
+		chessBoard[pointToMove.getRank()][pointToMove.getFile()] = currentPiece;
+
+		clearBlackTile();
+	}
+
+	private void clearBlackTile() {
+		for (int file = 0; file < BOARD_WIDTH; file++) {
+			for (int rank = 0; rank < BOARD_HEIGHT; rank++) {
+				if (file % 2 == 0 || rank % 2 == 0) {
+					chessBoard[rank][file] = tileWhite;
+				}
+			}
+		}
 	}
 }

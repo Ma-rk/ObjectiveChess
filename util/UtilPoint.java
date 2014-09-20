@@ -48,6 +48,7 @@ public class UtilPoint {
 	}
 
 	public static void highlightPoints(ArrayList<Point> pointsICanGo) {
+		UtilEtc.printEnterPoint("highlightPoints");
 		for (Point pointPosition : pointsICanGo) {
 			highlightOnePoint(pointPosition);
 		}

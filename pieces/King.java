@@ -7,7 +7,7 @@ package pieces;
 import java.util.ArrayList;
 
 import util.Point;
-import util.EtcUtil.Color;
+import util.UtilEtc.Color;
 import util.UtilPoint;
 
 public class King extends Piece {

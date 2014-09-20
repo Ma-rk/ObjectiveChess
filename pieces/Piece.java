@@ -7,7 +7,7 @@ package pieces;
 import java.util.ArrayList;
 
 import util.Point;
-import util.EtcUtil.Color;
+import util.UtilEtc.Color;
 
 public class Piece extends Tile {
 	private String image = null;

@@ -4,7 +4,7 @@
  */
 package pieces;
 
-import util.EtcUtil.Color;
+import util.UtilEtc.Color;
 
 public class Tile {
 	private String image = null;
