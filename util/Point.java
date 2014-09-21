@@ -16,12 +16,18 @@ public class Point {
 	public int getRank() {
 		return rank;
 	}
-	
+
 	public int getFile() {
 		return file;
 	}
-	
+
 	Point setPosition(int newRank, int newFile) {
 		return new Point(newRank, newFile);
+	}
+
+	void movePosition(int incrementRank, int incrementFile) {
+		// TODO Auto-generated method stub
+		rank += incrementRank;
+		file += incrementFile;
 	}
 }

@@ -5,11 +5,11 @@
 package board;
 
 import java.util.ArrayList;
-
 import objectChess.ChessMain;
 import pieces.King;
 import pieces.Pawn;
 import pieces.Piece;
+import pieces.Rook;
 import pieces.Tile;
 import util.Point;
 import util.UtilConv;
@@ -26,16 +26,19 @@ public class ChessBoard {
 
 	public static Tile tileWhite = new Tile("□");
 	public static Tile tileBlack = new Tile("■");
-	// public static Tile tileEmpty = new Tile("  ");
 
 	Pawn bPawn1 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black, 1);
 	Pawn bPawn2 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black, 2);
-	//Pawn bPawn3 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black, 3);
+	
+	Rook bRook1 = new Rook(PieceKind.bRook.getColor(), UtilEtc.Color.black, 1);
+	Rook bRook2 = new Rook(PieceKind.bRook.getColor(), UtilEtc.Color.black, 2);
 	King bKing = new King(PieceKind.bKing.getColor(), UtilEtc.Color.black, 1);
 
 	Pawn wPawn1 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white, 1);
 	Pawn wPawn2 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white, 2);
 	Pawn wPawn3 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white, 3);
+	
+	Rook wRook1 = new Rook(PieceKind.wRook.getColor(), UtilEtc.Color.white, 1);
 	King wKing = new King(PieceKind.wKing.getColor(), UtilEtc.Color.white, 1);
 
 	ArrayList<Point> pointsICanGo;
@@ -65,11 +68,15 @@ public class ChessBoard {
 		putPiece(bPawn1, 6, 4);
 		putPiece(bPawn2, 6, 5);
 		putPiece(bKing, 6, 6);
+		putPiece(bRook1, 6, 7);
 		
 		putPiece(wPawn1, 3, 4);
 		putPiece(wPawn2, 3, 5);
-		putPiece(wPawn3, 8, 4);
 		putPiece(wKing, 3, 6);
+		putPiece(wRook1, 3, 7);
+		
+		
+		putPiece(wPawn3, 8, 4);
 		// putPiece(wPawn2, 7, 2);
 		// putPiece(bKing, 8, 5);
 		//

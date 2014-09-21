@@ -5,7 +5,6 @@
 package pieces;
 
 import java.util.ArrayList;
-
 import util.UtilEtc.Color;
 import util.Point;
 import util.UtilPoint;

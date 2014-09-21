@@ -100,6 +100,29 @@ public class UtilPoint {
 		return pointsICanReach;
 	}
 
+	public static ArrayList<Point> getAvalablePath(Piece currentPiece, ArrayList<Point> directionsIWantToGo) {
+		UtilEtc.printEnterPoint("getAvalablePath");
+		ArrayList<Point> pathsICanGo = new ArrayList<Point>();
+		for (Point direction : directionsIWantToGo) {
+			Point tempPoint = new Point(currentPiece.getCurrentPosition().getRank(), currentPiece.getCurrentPosition().getFile());
+			while (true) {
+				tempPoint.movePosition(direction.getRank(), direction.getFile());
+				if (!isOnBoard(tempPoint)) {
+					break;
+				}
+				if (isEmptyPoint(tempPoint)) {
+					pathsICanGo.add(new Point(tempPoint.getRank(), tempPoint.getFile()));
+					continue;
+				}
+				if (!isSameColor(currentPiece, tempPoint)) {
+					pathsICanGo.add(new Point(tempPoint.getRank(), tempPoint.getFile()));
+				}
+				break;
+			}
+		}
+		return pathsICanGo;
+	}
+
 	private static Point getPointTo(Piece piece, Point step) {
 		UtilEtc.printEnterPoint("getPointTo");
 		int rankTo = piece.getCurrentPosition().getRank() + step.getRank();
@@ -108,14 +131,15 @@ public class UtilPoint {
 	}
 
 	public static void highlightPoints(ArrayList<Point> pointsICanGo) {
-		// 입력받은 배열에 들어있는 칸들로 highlightOnePoint를 호출한다.
 		UtilEtc.printEnterPoint("highlightPoints");
+		// 입력받은 배열에 들어있는 칸들로 highlightOnePoint를 호출한다.
 		for (Point pointPosition : pointsICanGo) {
 			highlightOnePoint(pointPosition);
 		}
 	}
 
 	private static void highlightOnePoint(Point pointPosition) {
+		UtilEtc.printEnterPoint("highlightOnePoint");
 		// 입력받은 칸 주변의 8개 타일을 검은 타일로 바꾼다.
 		int currentRank = pointPosition.getRank();
 		int currentFile = pointPosition.getFile();

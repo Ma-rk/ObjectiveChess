@@ -17,10 +17,14 @@ public class Piece extends Tile {
 	ArrayList<Point> pointsICanReach = new ArrayList<Point>();
 	ArrayList<Point> pointsIWantToAttack = new ArrayList<Point>();
 	ArrayList<Point> pointsICanAttack = new ArrayList<Point>();
-	// these are for the rest pieces.
+	// these are for King, Knight.
 	ArrayList<Point> pointsIWantToGo = new ArrayList<Point>();
 	ArrayList<Point> pointsICanGo = new ArrayList<Point>();
-
+	// these are for Bishop, Rook and Queen
+	ArrayList<Point> directionsIWantToGo = new ArrayList<Point>();
+	ArrayList<Point> directionsICanGo = new ArrayList<Point>();
+	
+	
 	public Point myPosition;
 	public int moves = 0;
 	public Color color = Color.noColor;
@@ -70,10 +74,8 @@ public class Piece extends Tile {
 	}
 
 	public ArrayList<Point> getAvailablePoint() {
-
 		// 널로 리턴하는게 맞나? 일단 이대로 둬 보자. 구현은 자식 클래스에서 하니까...
 		return null;
-
 	}
 	
 	void resetArrays(){
@@ -83,5 +85,7 @@ public class Piece extends Tile {
 		pointsICanAttack = new ArrayList<Point>();
 		pointsIWantToGo = new ArrayList<Point>();
 		pointsICanGo = new ArrayList<Point>();
+		directionsIWantToGo = new ArrayList<Point>();
+		directionsICanGo = new ArrayList<Point>();
 	}
 }
