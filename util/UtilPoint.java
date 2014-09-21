@@ -10,52 +10,113 @@ import pieces.Piece;
 import board.ChessBoard;
 
 public class UtilPoint {
-	// 넘겨받은 좌표 이동할 수 있는지 판별. 우리편 말이면 false, 나머지는 true.
-	public static boolean isAvalablePoint(Piece piece, Point point) {
-
-		int destRank = piece.myPosition.getRank() + point.getRank();
-		int destFile = piece.myPosition.getFile() + point.getFile();
-
-		// out of chess board
-		if (destRank < 1 || ChessBoard.BOARD_WIDTH - 1 < destRank)
-			return false;
-		// out of chess board
-		if (destFile < 1 || ChessBoard.BOARD_HEIGHT - 1 < destFile)
-			return false;
-
-		if (ChessBoard.chessBoard[destRank][destFile] == null) {
-			return true; // empty tile. can move.
-		}
-
-		Piece locatedPiece = (Piece) ChessBoard.chessBoard[destRank][destFile];
-		if (locatedPiece.color == piece.color) {
-			return false; // same color. can not move.
-		}
+	private static boolean isOnBoard(Point pointTo) {
+		UtilEtc.printEnterPoint("isOnBoard");
+		if (pointTo.getRank() < 1 || ChessBoard.BOARD_WIDTH - 1 < pointTo.getRank())
+			return false; // out of the board.
+		if (pointTo.getFile() < 1 || ChessBoard.BOARD_HEIGHT - 1 < pointTo.getFile())
+			return false; // out of the board.
 		return true;
 	}
 
-	public static ArrayList<Point> getAvalablePoint(Piece piece, ArrayList<Point> pointsIWantToGo) {
+	private static boolean isEmptyPoint(Point pointTo) {
+		UtilEtc.printEnterPoint("isEmptyPoint");
+		if (ChessBoard.chessBoard[pointTo.getRank()][pointTo.getFile()] == null)
+			return true; // empty tile.
+		else
+			return false; // occupied tile.
+	}
+
+	private static boolean isSameColor(Piece currentPiece, Point pointTo) {
+		UtilEtc.printEnterPoint("isSameColor");
+		Piece locatedPiece = (Piece) ChessBoard.chessBoard[pointTo.getRank()][pointTo.getFile()];
+		if (currentPiece.color == locatedPiece.color)
+			return true; // same color.
+		return false; // different color.
+	}
+
+	public static boolean isAvalablePoint(Piece currentPiece, Point pointTo) {
+		UtilEtc.printEnterPoint("isAvalablePoint");
+		if (!isOnBoard(pointTo))
+			return false;
+		if (isEmptyPoint(pointTo))
+			return true; // empty tile. can move.
+		if (isSameColor(currentPiece, pointTo))
+			return false; // same color. can not move.
+		else
+			return true; // different color. can move.
+	}
+
+	public static ArrayList<Point> getAvalablePoints(Piece currentPiece, ArrayList<Point> pointsIWantToGo) {
+		UtilEtc.printEnterPoint("getAvalablePoints");
 		ArrayList<Point> pointsICanGo = new ArrayList<Point>();
-		for (Point point : pointsIWantToGo) {
-			if (isAvalablePoint(piece, point)) {
-				int rankTo = piece.getCurrentPosition().getRank() + point.getRank();
-				int fileTo = piece.getCurrentPosition().getFile() + point.getFile();
-				pointsICanGo.add(new Point(rankTo, fileTo));
-			}
+		for (Point step : pointsIWantToGo) {
+			Point pointTo = getPointTo(currentPiece, step);
+			if (isAvalablePoint(currentPiece, pointTo))
+				pointsICanGo.add(getPointTo(currentPiece, step));
 		}
 		return pointsICanGo;
 	}
 
-	//입력받은 배열에 들어있는 칸들로 highlightOnePoint를 호출한다.
+	public static boolean isReachablePoint(Piece currentPiece, Point pointTo) {
+		UtilEtc.printEnterPoint("isReachablePoint");
+		if (!isOnBoard(pointTo))
+			return false;
+		if (isEmptyPoint(pointTo))
+			return true; // empty tile. can move.
+		return false;
+	}
+
+	public static ArrayList<Point> getReachablePoints(Piece currentPiece, ArrayList<Point> pointsIWantToGo) {
+		UtilEtc.printEnterPoint("getReachablePoints");
+		ArrayList<Point> pointsICanReach = new ArrayList<Point>();
+		for (Point step : pointsIWantToGo) {
+			Point pointTo = getPointTo(currentPiece, step);
+			if (isReachablePoint(currentPiece, pointTo))
+				pointsICanReach.add(getPointTo(currentPiece, step));
+		}
+		return pointsICanReach;
+	}
+
+	public static boolean isAttackablePoint(Piece currentPiece, Point pointTo) {
+		UtilEtc.printEnterPoint("isAttackablePoint");
+		if (!isOnBoard(pointTo))
+			return false;
+		if (isEmptyPoint(pointTo))
+			return false; // empty tile. can not attack.
+		if (!isSameColor(currentPiece, pointTo))
+			return true; // different color. can attack.
+		return false;
+	}
+
+	public static ArrayList<Point> getAttackablePoints(Piece currentPiece, ArrayList<Point> pointsIWantToGo) {
+		UtilEtc.printEnterPoint("getAttackablePoints");
+		ArrayList<Point> pointsICanReach = new ArrayList<Point>();
+		for (Point step : pointsIWantToGo) {
+			Point pointTo = getPointTo(currentPiece, step);
+			if (isAttackablePoint(currentPiece, pointTo))
+				pointsICanReach.add(getPointTo(currentPiece, step));
+		}
+		return pointsICanReach;
+	}
+
+	private static Point getPointTo(Piece piece, Point step) {
+		UtilEtc.printEnterPoint("getPointTo");
+		int rankTo = piece.getCurrentPosition().getRank() + step.getRank();
+		int fileTo = piece.getCurrentPosition().getFile() + step.getFile();
+		return new Point(rankTo, fileTo);
+	}
+
 	public static void highlightPoints(ArrayList<Point> pointsICanGo) {
+		// 입력받은 배열에 들어있는 칸들로 highlightOnePoint를 호출한다.
 		UtilEtc.printEnterPoint("highlightPoints");
 		for (Point pointPosition : pointsICanGo) {
 			highlightOnePoint(pointPosition);
 		}
 	}
 
-	// 입력받은 칸 주변의 8개 타일을 검은 타일로 바꾼다.
 	private static void highlightOnePoint(Point pointPosition) {
+		// 입력받은 칸 주변의 8개 타일을 검은 타일로 바꾼다.
 		int currentRank = pointPosition.getRank();
 		int currentFile = pointPosition.getFile();
 

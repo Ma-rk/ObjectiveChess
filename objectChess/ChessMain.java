@@ -14,7 +14,7 @@ import board.ChessBoard;
 
 public class ChessMain {
 
-	public static UtilEtc.Color curentTurn = Color.black;
+	public static UtilEtc.Color curentTurn = Color.white;
 
 	public static void main(String[] args) {
 		Piece currentPiece = null;
@@ -68,6 +68,9 @@ public class ChessMain {
 			// 선택한 자리로 말을 옮긴다.
 			// 선택한 자리에 상대방의 말이 있으면 말을 먹는다.
 			cb.executeMove(currentPiece, pointToMove);
+
+			// 검은 타일로 하이라이트 된 체스판을 원래대로 되돌린다.
+			cb.resetBoardToWhiteTile();
 
 			isGameFinished = cb.isGameFinished(ChessMain.curentTurn);
 			
