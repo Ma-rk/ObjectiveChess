@@ -6,14 +6,16 @@ package board;
 
 import java.util.ArrayList;
 
+import objectChess.ChessMain;
 import pieces.King;
 import pieces.Pawn;
 import pieces.Piece;
 import pieces.Tile;
-import util.UtilEtc;
-import util.UtilEtc.PieceKind;
 import util.Point;
 import util.UtilConv;
+import util.UtilEtc;
+import util.UtilEtc.Color;
+import util.UtilEtc.PieceKind;
 import util.UtilGetInput;
 import util.UtilPoint;
 
@@ -24,14 +26,15 @@ public class ChessBoard {
 
 	public static Tile tileWhite = new Tile("□");
 	public static Tile tileBlack = new Tile("■");
-	public static Tile tileEmpty = new Tile("  ");
+	// public static Tile tileEmpty = new Tile("  ");
 
-	Pawn b_pawn1 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black);
-	Pawn b_pawn2 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black);
+	//Pawn bPawn1 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black);
+	//Pawn bPawn2 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black);
 	King bKing = new King(PieceKind.bKing.getColor(), UtilEtc.Color.black);
 
-	Pawn w_pawn1 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white);
-	Pawn w_pawn2 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white);
+	Pawn wPawn1 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white);
+	Pawn wPawn2 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white);
+	King wKing = new King(PieceKind.wKing.getColor(), UtilEtc.Color.white);
 
 	ArrayList<Point> pointsICanGo;
 	ArrayList<Piece> deadPieces = new ArrayList<Piece>();
@@ -41,48 +44,34 @@ public class ChessBoard {
 	}
 
 	private void initailizeBoard() {
-		generateEmptyBoard();
+		resetBoardToWhiteTile();
 		setupPiececs();
 	}
 
-	private void generateEmptyBoard() {
+	private void resetBoardToWhiteTile() {
 		for (int file = 0; file < BOARD_WIDTH; file++) {
 			for (int rank = 0; rank < BOARD_HEIGHT; rank++) {
 				if (file % 2 == 0 || rank % 2 == 0) {
 					chessBoard[rank][file] = tileWhite;
-				} else {
-					chessBoard[rank][file] = tileEmpty;
 				}
 			}
 		}
 	}
 
 	private void setupPiececs() {
-		putPiece(b_pawn1, 7, 1);
-		putPiece(b_pawn2, 7, 2);
-		putPiece(bKing, 8, 5);
-
-		putPiece(w_pawn1, 2, 1);
-		putPiece(w_pawn2, 2, 2);
-		putPiece(w_pawn2, 2, 2);
+		putPiece(bKing, 8, 3);
+		putPiece(wPawn1, 7, 2);
+		putPiece(wKing, 4, 3);
+		//putPiece(wPawn2, 7, 2);
+		
+		
+//		putPiece(b_pawn1, 7, 1);
+//		putPiece(b_pawn2, 7, 2);
+//		putPiece(bKing, 8, 5);
+//
+//		putPiece(w_pawn1, 2, 1);
+//		putPiece(w_pawn2, 7, 4);
 	}
-
-	// b_pawn1.setCurrentPosition(UtilConv.convToInnerCoord(1, 7));
-	// chessBoard[UtilConv.convToInnerFile(1)][UtilConv.convToInnerRank(7)] =
-	// b_pawn1;
-	//
-	// b_pawn2.setCurrentPosition(UtilConv.convToInnerCoord(2, 7));
-	// chessBoard[UtilConv.convToInnerFile(2)][UtilConv.convToInnerRank(7)] =
-	// b_pawn2;
-	//
-	// //chessBoard[1][5] = b_rook1;
-	// // chessBoard[1][5] = b_rook1;
-	// b_pawn2.setCurrentPosition(UtilConv.convToInnerFile(3),
-	// UtilConv.convToInnerRank(8));
-	// chessBoard[1][5] = b_bishop1;
-	//
-	// chessBoard[13][1] = w_pawn1;
-	// chessBoard[13][3] = w_pawn2;
 
 	private void putPiece(Piece piece, int rank, int file) {
 		piece.setCurrentPosition(UtilConv.convToInnerCoord(rank, file));
@@ -98,24 +87,42 @@ public class ChessBoard {
 			else
 				System.out.print("  ");
 			for (int file = 0; file < BOARD_WIDTH; file++) {
-				System.out.print(chessBoard[rank][file].getImage());
+				if (chessBoard[rank][file] == null) {
+					System.out.print("  ");
+				} else {
+					System.out.print(chessBoard[rank][file].getImage());
+				}
 			}
 			System.out.println();
 		}
 		System.out.print("    1   2   3   4   5   6   7   8 (가로)    ");
 		for (int numOfDeadPieces = 0; numOfDeadPieces < deadPieces.size(); numOfDeadPieces++) {
-			System.out.print(deadPieces.get(numOfDeadPieces) + " ");
+			System.out.print(deadPieces.get(numOfDeadPieces).getImage() + " ");
 		}
 		System.out.println();
 	}
 
+	// 이동할 말(자기 말)을 고르는 메소드
 	public Piece pickPieceToMove() {
 		Point positionOfPieceToMove = UtilGetInput.getPosition();
 
-		Piece piece = null;
-		if (!(chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()].getClass() == Tile.class)) {
-			piece = (Piece) chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()];
+		// 선택한 칸이 빈 칸이면 null 리턴
+		if (chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()] == null) {
+			return null;
 		}
+		// 선택한 칸이 타일이면 null 리턴
+		if (chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()].getClass() == Tile.class) {
+			return null;
+
+		}
+
+		Piece piece = (Piece) chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()];
+
+		// 선택한 칸의 말이 자기게 아니면 널 리턴
+		if (piece.color != ChessMain.curentTurn) {
+			return null;
+		}
+
 		return piece;
 	}
 
@@ -141,23 +148,38 @@ public class ChessBoard {
 
 	public void executeMove(Piece currentPiece, Point pointToMove) {
 		UtilEtc.printEnterPoint("executeMove");
-		if (chessBoard[pointToMove.getRank()][pointToMove.getFile()].getClass() != Tile.class) {
-			deadPieces.add((Piece) chessBoard[pointToMove.getRank()][pointToMove.getFile()]);
-		}
 
-		chessBoard[currentPiece.getCurrentPosition().getRank()][currentPiece.getCurrentPosition().getFile()] = tileEmpty;
+		//이동할 자리에 상대 말이 있으면 먹는다.
+		if (chessBoard[pointToMove.getRank()][pointToMove.getFile()] != null) 
+			deadPieces.add((Piece) chessBoard[pointToMove.getRank()][pointToMove.getFile()]);
+
+		//체스판의 이동 전 위치를 비운다. 
+		chessBoard[currentPiece.getCurrentPosition().getRank()][currentPiece.getCurrentPosition().getFile()] = null;
+		
+		//체스판의 이동 후 위치에 현재 말을 위치시킨다.
 		chessBoard[pointToMove.getRank()][pointToMove.getFile()] = currentPiece;
 
-		clearBlackTile();
+		//현재 말 내부의 좌표값을 이동 후 위치로 바꾼다.
+		currentPiece.setCurrentPosition(pointToMove);
+		
+		//검은 타일로 하이라이트 된 체스판을 원래대로 되돌린다. 
+		resetBoardToWhiteTile();
 	}
 
-	private void clearBlackTile() {
-		for (int file = 0; file < BOARD_WIDTH; file++) {
-			for (int rank = 0; rank < BOARD_HEIGHT; rank++) {
-				if (file % 2 == 0 || rank % 2 == 0) {
-					chessBoard[rank][file] = tileWhite;
+	public boolean isGameFinished(Color curentTurn) {
+		UtilEtc.printEnterPoint("isGameFinished");
+		Piece cp = null;
+		for (int rank = 1; rank < BOARD_HEIGHT; rank += 2) {
+			for (int file = 1; file < BOARD_WIDTH; file += 2) {
+				if (chessBoard[rank][file] != null) {
+					cp = (Piece) chessBoard[rank][file];
+					if (cp.getColor() != curentTurn) {
+						return false;
+					}
 				}
 			}
 		}
+		return true;
 	}
+
 }

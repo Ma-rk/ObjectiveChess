@@ -6,6 +6,8 @@ package pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.text.Position;
+
 import util.Point;
 import util.UtilEtc.Color;
 
@@ -29,6 +31,10 @@ public class Piece extends Tile {
 		this.myPosition = new Point(rank, file);
 		this.color = color;
 	}
+	
+	public void moved(){
+		moves++;
+	}
 
 	public void setCurrentPosition(int rank, int file) {
 		this.myPosition = new Point(rank, file);
@@ -41,15 +47,24 @@ public class Piece extends Tile {
 	public Point getCurrentPosition() {
 		return this.myPosition;
 	}
+	
+	public Color getColor() {
+		return this.color;
+	}
 
+	String generateStringInfo(String pieceKind, Point myPosition){
+		return pieceKind +" instance. Rank: " + (myPosition.getRank() + 17) / 2 + "File: " + (myPosition.getFile() + 1) / 2;
+	}
+	
 	public String toString() {
-		return "Piece instance. Rank: " + (myPosition.getRank() + 17) / 2 + "File: " + (myPosition.getFile() + 1) / 2;
+//		return "Piece instance. Rank: " + (myPosition.getRank() + 17) / 2 + "File: " + (myPosition.getFile() + 1) / 2;
+		return generateStringInfo("Piece", myPosition);
 
 	}
 
 	public ArrayList<Point> getAvailablePoint() {
 
-		// 널로 리턴하는게 맞나? 일단 구현은 자식 클래스에서 하니까 이대로 둬 보자...
+		// 널로 리턴하는게 맞나? 일단 이대로 둬 보자. 구현은 자식 클래스에서 하니까...
 		return null;
 
 	}

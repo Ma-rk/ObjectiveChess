@@ -14,12 +14,10 @@ public class King extends Piece {
 
 	public King(String image, Color color) {
 		super(image, color);
-		// TODO Auto-generated constructor stub
 	}
 
 	public String toString() {
-		return "King instance. + Rank: " + (myPosition.getRank() + 17) / 2 + "File: " + (myPosition.getFile() + 1) / 2;
-
+		return generateStringInfo("King", myPosition);
 	}
 
 	public ArrayList<Point> getAvailablePoint() {

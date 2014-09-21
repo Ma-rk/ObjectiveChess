@@ -7,7 +7,6 @@ package util;
 import java.util.ArrayList;
 
 import pieces.Piece;
-import pieces.Tile;
 import board.ChessBoard;
 
 public class UtilPoint {
@@ -24,7 +23,7 @@ public class UtilPoint {
 		if (destFile < 1 || ChessBoard.BOARD_HEIGHT - 1 < destFile)
 			return false;
 
-		if (ChessBoard.chessBoard[destRank][destFile].getClass() == Tile.class) {
+		if (ChessBoard.chessBoard[destRank][destFile] == null) {
 			return true; // empty tile. can move.
 		}
 
@@ -47,6 +46,7 @@ public class UtilPoint {
 		return pointsICanGo;
 	}
 
+	//입력받은 배열에 들어있는 칸들로 highlightOnePoint를 호출한다.
 	public static void highlightPoints(ArrayList<Point> pointsICanGo) {
 		UtilEtc.printEnterPoint("highlightPoints");
 		for (Point pointPosition : pointsICanGo) {
@@ -54,7 +54,7 @@ public class UtilPoint {
 		}
 	}
 
-	//입력받은 칸 주변의 8개 타일을 검은 타일로 바꾼다.
+	// 입력받은 칸 주변의 8개 타일을 검은 타일로 바꾼다.
 	private static void highlightOnePoint(Point pointPosition) {
 		int currentRank = pointPosition.getRank();
 		int currentFile = pointPosition.getFile();

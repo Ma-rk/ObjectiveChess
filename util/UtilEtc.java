@@ -27,6 +27,10 @@ public class UtilEtc {
 	public static void printEnterPoint(String methodName) {
 		System.out.println("Entered " + methodName + "()");
 	}
+	
+	public static void printEscapePoint(String methodName) {
+		System.out.println("Escaping " + methodName + "()");
+	}
 
 
 
