@@ -26,6 +26,10 @@ public class Tile {
 		return this.color;
 	}
 	
+	public String getName(){
+		return name;
+	}
+	
 	public String toString(){
 		return "Tile instance. " + image;
 	}

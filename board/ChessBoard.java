@@ -5,8 +5,11 @@
 package board;
 
 import java.util.ArrayList;
+
 import objectChess.ChessMain;
+import pieces.Bishop;
 import pieces.King;
+import pieces.Night;
 import pieces.Pawn;
 import pieces.Piece;
 import pieces.Rook;
@@ -29,17 +32,41 @@ public class ChessBoard {
 
 	Pawn bPawn1 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 1);
 	Pawn bPawn2 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 2);
+	Pawn bPawn3 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 3);
+	Pawn bPawn4 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 4);
+	Pawn bPawn5 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 5);
+	Pawn bPawn6 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 6);
+	Pawn bPawn7 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 7);
+	Pawn bPawn8 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 8);
 
 	Rook bRook1 = new Rook(PieceKind.bRook.getImage(), PieceKind.bRook.getName(), UtilEtc.Color.black, 1);
-	Rook bRook2 = new Rook(PieceKind.bRook.getImage(), PieceKind.bRook.getName(), UtilEtc.Color.black, 2);
+	Night bNight1 = new Night(PieceKind.bNight.getImage(), PieceKind.bNight.getName(), UtilEtc.Color.black, 1);
+	Bishop bBishop1 = new Bishop(PieceKind.bBishop.getImage(), PieceKind.bBishop.getName(), UtilEtc.Color.black, 1);
+
 	King bKing = new King(PieceKind.bKing.getImage(), PieceKind.bKing.getName(), UtilEtc.Color.black, 1);
+	
+	Bishop bBishop2 = new Bishop(PieceKind.bBishop.getImage(), PieceKind.bBishop.getName(), UtilEtc.Color.black, 2);
+	Night bNight2 = new Night(PieceKind.bNight.getImage(), PieceKind.bNight.getName(), UtilEtc.Color.black, 2);
+	Rook bRook2 = new Rook(PieceKind.bRook.getImage(), PieceKind.bRook.getName(), UtilEtc.Color.black, 2);
 
 	Pawn wPawn1 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 1);
 	Pawn wPawn2 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 2);
 	Pawn wPawn3 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 3);
+	Pawn wPawn4 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 4);
+	Pawn wPawn5 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 5);
+	Pawn wPawn6 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 6);
+	Pawn wPawn7 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 7);
+	Pawn wPawn8 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 8);
 
 	Rook wRook1 = new Rook(PieceKind.wRook.getImage(), PieceKind.wRook.getName(), UtilEtc.Color.white, 1);
+	Night wNight1 = new Night(PieceKind.wNight.getImage(), PieceKind.wNight.getName(), UtilEtc.Color.white, 1);
+	Bishop wBishop1 = new Bishop(PieceKind.wBishop.getImage(), PieceKind.wBishop.getName(), UtilEtc.Color.white, 1);
+	
 	King wKing = new King(PieceKind.wKing.getImage(), PieceKind.wKing.getName(), UtilEtc.Color.white, 1);
+	
+	Bishop wBishop2 = new Bishop(PieceKind.wBishop.getImage(), PieceKind.wBishop.getName(), UtilEtc.Color.white, 2);
+	Night wNight2 = new Night(PieceKind.wNight.getImage(), PieceKind.wNight.getName(), UtilEtc.Color.white, 2);
+	Rook wRook2 = new Rook(PieceKind.wRook.getImage(), PieceKind.wRook.getName(), UtilEtc.Color.white, 2);
 
 	ArrayList<Point> pointsICanGo;
 	ArrayList<Piece> deadPieces = new ArrayList<Piece>();
@@ -65,22 +92,43 @@ public class ChessBoard {
 
 	private void setupPiececs() {
 
-		putPiece(bPawn1, 6, 4);
-		putPiece(bPawn2, 6, 5);
-		putPiece(bKing, 6, 6);
-		putPiece(bRook1, 6, 7);
+		putPiece(bPawn1, 7, 1);
+		putPiece(bPawn2, 7, 2);
+		putPiece(bPawn3, 7, 3);
+		putPiece(bPawn4, 7, 4);
+		putPiece(bPawn5, 7, 5);
+		putPiece(bPawn6, 7, 6);
+		putPiece(bPawn7, 7, 7);
+		putPiece(bPawn8, 7, 8);
+		
+		putPiece(bRook1, 8, 1);
+		putPiece(bNight1, 8, 2);
+		putPiece(bBishop1, 8, 3);
+		putPiece(bKing, 8, 4);
+		
+		putPiece(bBishop1, 8, 6);
+		putPiece(bNight2, 8, 7);
+		putPiece(bRook2, 8, 8);
 
-		putPiece(wPawn1, 3, 4);
-		putPiece(wPawn2, 3, 5);
-		putPiece(wKing, 3, 6);
-		putPiece(wRook1, 3, 7);
+		
+		putPiece(wPawn1, 2, 1);
+		putPiece(wPawn2, 2, 2);
+		putPiece(wPawn3, 2, 3);
+		putPiece(wPawn4, 2, 4);
+		putPiece(wPawn5, 2, 5);
+		putPiece(wPawn6, 2, 6);
+		putPiece(wPawn7, 2, 7);
+		putPiece(wPawn8, 2, 8);
+		
+		putPiece(wRook1, 1, 1);
+		putPiece(wNight1, 1, 2);
+		putPiece(wBishop1, 1, 3);
+		putPiece(wKing, 1, 4);
+		
+		putPiece(wBishop2, 1, 6);
+		putPiece(wNight2, 1, 7);
+		putPiece(wRook2, 1, 8);
 
-		putPiece(wPawn3, 8, 4);
-		// putPiece(wPawn2, 7, 2);
-		// putPiece(bKing, 8, 5);
-		//
-		// putPiece(w_pawn1, 2, 1);
-		// putPiece(w_pawn2, 7, 4);
 	}
 
 	private void putPiece(Piece piece, int rank, int file) {
@@ -145,7 +193,7 @@ public class ChessBoard {
 		UtilEtc.printEnterPoint("showAvailablePoint");
 		System.out.println(currentPiece.toString());
 
-		pointsICanGo = currentPiece.getAvailablePoint();
+		pointsICanGo = currentPiece.getAvailablePoints();
 		UtilPoint.highlightPoints(pointsICanGo);
 		UtilEtc.printEscapePoint("showAvailablePoint");
 	}

@@ -16,7 +16,7 @@ public class King extends Piece {
 		super(image, name, color, serial);
 	}
 
-	public ArrayList<Point> getAvailablePoint() {
+	public ArrayList<Point> getAvailablePoints() {
 		resetArrays();
 		pointsIWantToGo.add(new Point(-2, 0));
 		pointsIWantToGo.add(new Point(-2, 2));

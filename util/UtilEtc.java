@@ -10,9 +10,9 @@ public class UtilEtc {
 	}
 
 	public static enum PieceKind {
-		wTile("□", "wTile"), bTile("■", "bTile"), wKing("♔", "wKing"), wRook("♖", "wRook"), wBishop("♗", "wBishopw"), wQueen("♕", "wQueen"), wNnight("♘",
-				"wNnight"), wPawn("♙", "wPawn"), bKing("♚", "bKing"), bRook("♜", "bRook"), bBishop("♝", "bBishop"), bQueen("♛", "bQueen"), bNnight("♞", "b"), bPawn(
-				"♟", "bNnight");
+		wTile("□", "Tile"), bTile("■", "Tile"), wKing("♔", "King"), wRook("♖", "Rook"), wBishop("♗", "Bishopw"), wQueen("♕", "Queen"), wNight("♘",
+				"Night"), wPawn("♙", "Pawn"), bKing("♚", "King"), bRook("♜", "Rook"), bBishop("♝", "Bishop"), bQueen("♛", "Queen"), bNight("♞", "Night"), bPawn(
+				"♟", "Pawn");
 		private String image;
 		private String name;
 

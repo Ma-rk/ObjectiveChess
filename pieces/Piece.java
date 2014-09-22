@@ -21,7 +21,7 @@ public class Piece extends Tile {
 	// these are for Bishop, Rook and Queen
 	ArrayList<Point> directionsIWantToGo = new ArrayList<Point>();
 	ArrayList<Point> directionsICanGo = new ArrayList<Point>();
-	
+
 	public Point myPosition;
 	public int moves = 0;
 	public Color color = Color.noColor;
@@ -54,11 +54,12 @@ public class Piece extends Tile {
 		return name + serial + ". Rank: " + (myPosition.getRank() + 17) / 2 + ", File: " + (myPosition.getFile() + 1) / 2;
 	}
 
-	public ArrayList<Point> getAvailablePoint() {
+	public ArrayList<Point> getAvailablePoints() {
+		// ArrayList<Point> ap = UtilMovement.getAvailablePoint(this);
 		return null;
 	}
-	
-	void resetArrays(){
+
+	void resetArrays() {
 		pointsIWantToReach = new ArrayList<Point>();
 		pointsICanReach = new ArrayList<Point>();
 		pointsIWantToAttack = new ArrayList<Point>();

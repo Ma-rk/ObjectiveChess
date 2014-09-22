@@ -16,7 +16,7 @@ public class Pawn extends Piece {
 		super(image, name, color, serial);
 	}
 
-	public ArrayList<Point> getAvailablePoint() {
+	public ArrayList<Point> getAvailablePoints() {
 		resetArrays();
 		if (color == Color.black) { // 이 객체가 black일 때의 로직(위에서 아래로 공격하는 로직)
 			// 이동 가능 포인트
