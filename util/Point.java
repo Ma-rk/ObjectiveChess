@@ -26,7 +26,6 @@ public class Point {
 	}
 
 	void movePosition(int incrementRank, int incrementFile) {
-		// TODO Auto-generated method stub
 		rank += incrementRank;
 		file += incrementFile;
 	}

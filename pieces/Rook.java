@@ -12,13 +12,8 @@ import util.UtilEtc.Color;
 
 public class Rook extends Piece {
 
-	public Rook(String image, Color color, int serial) {
-		super(image, color);
-		this.serial = serial;
-	}
-
-	public String toString() {
-		return generateStringInfo("Rook", myPosition);
+	public Rook(String image, String name, Color color, int serial) {
+		super(image, name, color, serial);
 	}
 
 	public ArrayList<Point> getAvailablePoint() {

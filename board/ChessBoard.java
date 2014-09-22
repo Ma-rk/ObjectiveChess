@@ -24,22 +24,22 @@ public class ChessBoard {
 	public final static int BOARD_HEIGHT = 17;
 	public static Tile[][] chessBoard = new Tile[BOARD_WIDTH][BOARD_HEIGHT];
 
-	public static Tile tileWhite = new Tile("□");
-	public static Tile tileBlack = new Tile("■");
+	public static Tile tileWhite = new Tile(PieceKind.wTile.getImage(), PieceKind.wTile.getName(), UtilEtc.Color.white);
+	public static Tile tileBlack = new Tile(PieceKind.bTile.getImage(), PieceKind.bTile.getName(), UtilEtc.Color.black);
 
-	Pawn bPawn1 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black, 1);
-	Pawn bPawn2 = new Pawn(PieceKind.bPawn.getColor(), UtilEtc.Color.black, 2);
-	
-	Rook bRook1 = new Rook(PieceKind.bRook.getColor(), UtilEtc.Color.black, 1);
-	Rook bRook2 = new Rook(PieceKind.bRook.getColor(), UtilEtc.Color.black, 2);
-	King bKing = new King(PieceKind.bKing.getColor(), UtilEtc.Color.black, 1);
+	Pawn bPawn1 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 1);
+	Pawn bPawn2 = new Pawn(PieceKind.bPawn.getImage(), PieceKind.bPawn.getName(), UtilEtc.Color.black, 2);
 
-	Pawn wPawn1 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white, 1);
-	Pawn wPawn2 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white, 2);
-	Pawn wPawn3 = new Pawn(PieceKind.wPawn.getColor(), UtilEtc.Color.white, 3);
-	
-	Rook wRook1 = new Rook(PieceKind.wRook.getColor(), UtilEtc.Color.white, 1);
-	King wKing = new King(PieceKind.wKing.getColor(), UtilEtc.Color.white, 1);
+	Rook bRook1 = new Rook(PieceKind.bRook.getImage(), PieceKind.bRook.getName(), UtilEtc.Color.black, 1);
+	Rook bRook2 = new Rook(PieceKind.bRook.getImage(), PieceKind.bRook.getName(), UtilEtc.Color.black, 2);
+	King bKing = new King(PieceKind.bKing.getImage(), PieceKind.bKing.getName(), UtilEtc.Color.black, 1);
+
+	Pawn wPawn1 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 1);
+	Pawn wPawn2 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 2);
+	Pawn wPawn3 = new Pawn(PieceKind.wPawn.getImage(), PieceKind.wPawn.getName(), UtilEtc.Color.white, 3);
+
+	Rook wRook1 = new Rook(PieceKind.wRook.getImage(), PieceKind.wRook.getName(), UtilEtc.Color.white, 1);
+	King wKing = new King(PieceKind.wKing.getImage(), PieceKind.wKing.getName(), UtilEtc.Color.white, 1);
 
 	ArrayList<Point> pointsICanGo;
 	ArrayList<Piece> deadPieces = new ArrayList<Piece>();
@@ -69,13 +69,12 @@ public class ChessBoard {
 		putPiece(bPawn2, 6, 5);
 		putPiece(bKing, 6, 6);
 		putPiece(bRook1, 6, 7);
-		
+
 		putPiece(wPawn1, 3, 4);
 		putPiece(wPawn2, 3, 5);
 		putPiece(wKing, 3, 6);
 		putPiece(wRook1, 3, 7);
-		
-		
+
 		putPiece(wPawn3, 8, 4);
 		// putPiece(wPawn2, 7, 2);
 		// putPiece(bKing, 8, 5);
@@ -87,7 +86,6 @@ public class ChessBoard {
 	private void putPiece(Piece piece, int rank, int file) {
 		piece.setCurrentPosition(UtilConv.convToInnerCoord(rank, file));
 		chessBoard[piece.getCurrentPosition().getRank()][piece.getCurrentPosition().getFile()] = piece;
-
 	}
 
 	public void printCurrentBoard() {
@@ -115,37 +113,31 @@ public class ChessBoard {
 
 	// 이동할 말(자기 말)을 고르는 메소드
 	public Piece pickPieceToMove() {
-		Point positionOfPieceToMove = UtilGetInput.getPosition();
+		Point positionOfPickedPiece = UtilGetInput.getPosition();
 
 		// 선택한 칸이 빈 칸이면 null 리턴
-		if (chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()] == null) {
+		if (chessBoard[positionOfPickedPiece.getRank()][positionOfPickedPiece.getFile()] == null)
 			return null;
-		}
 		// 선택한 칸이 타일이면 null 리턴
-		if (chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()].getClass() == Tile.class) {
+		if (chessBoard[positionOfPickedPiece.getRank()][positionOfPickedPiece.getFile()].getClass() == Tile.class)
 			return null;
 
-		}
-
-		Piece piece = (Piece) chessBoard[positionOfPieceToMove.getRank()][positionOfPieceToMove.getFile()];
+		Piece piece = (Piece) chessBoard[positionOfPickedPiece.getRank()][positionOfPickedPiece.getFile()];
 
 		// 선택한 칸의 말이 자기게 아니면 널 리턴
-		if (piece.color != ChessMain.curentTurn) {
+		if (piece.color != ChessMain.curentTurn)
 			return null;
-		}
 
 		return piece;
 	}
 
 	public Point pickPointToMove() {
 		Point pointToMove = UtilGetInput.getPosition();
-
 		for (Point nextPoint : pointsICanGo) {
 			if (nextPoint.getRank() == pointToMove.getRank() && nextPoint.getFile() == pointToMove.getFile()) {
 				return nextPoint;
 			}
 		}
-
 		return null;
 	}
 
@@ -155,6 +147,7 @@ public class ChessBoard {
 
 		pointsICanGo = currentPiece.getAvailablePoint();
 		UtilPoint.highlightPoints(pointsICanGo);
+		UtilEtc.printEscapePoint("showAvailablePoint");
 	}
 
 	public void executeMove(Piece currentPiece, Point pointToMove) {

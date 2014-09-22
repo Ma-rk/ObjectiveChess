@@ -10,28 +10,31 @@ public class UtilEtc {
 	}
 
 	public static enum PieceKind {
-		wKing("♔"), wRook("♖"), wBishop("♗"), wQueen("♕"), wNnight("♘"), wPawn("♙"), bKing("♚"), bRook("♜"), bBishop("♝"), bQueen("♛"), bNnight("♞"), bPawn("♟");
-		private String color;
+		wTile("□", "wTile"), bTile("■", "bTile"), wKing("♔", "wKing"), wRook("♖", "wRook"), wBishop("♗", "wBishopw"), wQueen("♕", "wQueen"), wNnight("♘",
+				"wNnight"), wPawn("♙", "wPawn"), bKing("♚", "bKing"), bRook("♜", "bRook"), bBishop("♝", "bBishop"), bQueen("♛", "bQueen"), bNnight("♞", "b"), bPawn(
+				"♟", "bNnight");
+		private String image;
+		private String name;
 
-		PieceKind(String color) {
-			System.out.println("Call Enum Constructor " + this);
-			this.color = color;
+		PieceKind(String image, String name) {
+			this.image = image;
+			this.name = name;
 		}
 
-		public String getColor() {
-			return this.color;
+		public String getImage() {
+			return this.image;
+		}
+
+		public String getName() {
+			return this.name;
 		}
 	}
-
 
 	public static void printEnterPoint(String methodName) {
 		System.out.println("Entered " + methodName + "()");
 	}
-	
+
 	public static void printEscapePoint(String methodName) {
 		System.out.println("Escaping " + methodName + "()");
 	}
-
-
-
 }

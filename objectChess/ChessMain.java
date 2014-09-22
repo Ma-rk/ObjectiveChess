@@ -25,10 +25,11 @@ public class ChessMain {
 
 		while (!isGameFinished) { // 게임이 끝나지 않았으면 와일을 계속 돈다
 
-			// 이번 턴에서 사용자 입력을 받는 while에 진입하기 위해 currentPiece과 pointToMove에 null을 대입한다.
+			// 이번 턴에서 사용자 입력을 받는 while에 진입하기 위해 currentPiece과 pointToMove에 null을
+			// 대입한다.
 			currentPiece = null;
 			pointToMove = null;
-			
+
 			UtilEtc.printEnterPoint("MAIN WHILE");
 
 			// 현재 상태의 체스판과 말을 출력한다.
@@ -48,6 +49,7 @@ public class ChessMain {
 					UtilMessages.pointHasNoPiece();
 				}
 			}
+			System.out.println(currentPiece.toString());
 
 			// 선택한 말이 움직일 수 있는 자리를 가져온다.
 			cb.showAvailablePoint(currentPiece);//
@@ -73,7 +75,7 @@ public class ChessMain {
 			cb.resetBoardToWhiteTile();
 
 			isGameFinished = cb.isGameFinished(ChessMain.curentTurn);
-			
+
 			// 한 턴의 모든 작업이 종료되면 현재 턴을 표시하는 플래그의 값을 바꾼다
 			if (ChessMain.curentTurn == Color.black)
 				ChessMain.curentTurn = Color.white;
@@ -86,7 +88,7 @@ public class ChessMain {
 
 		UtilMessages.gameOver();
 		UtilMessages.winnerIs(currentPiece);
-		
+
 		UtilGetInput.intPicker.close();
 	}
 }

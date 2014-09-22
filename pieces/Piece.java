@@ -10,8 +10,6 @@ import util.Point;
 import util.UtilEtc.Color;
 
 public class Piece extends Tile {
-	private String image = null;
-
 	// these arrays are for Pawn.
 	ArrayList<Point> pointsIWantToReach = new ArrayList<Point>();
 	ArrayList<Point> pointsICanReach = new ArrayList<Point>();
@@ -24,22 +22,16 @@ public class Piece extends Tile {
 	ArrayList<Point> directionsIWantToGo = new ArrayList<Point>();
 	ArrayList<Point> directionsICanGo = new ArrayList<Point>();
 	
-	
 	public Point myPosition;
 	public int moves = 0;
 	public Color color = Color.noColor;
 	public int serial = 0;
 
-	public Piece(String image, Color color) {
-		super(image);
+	public Piece(String image, String name, Color color, int serial) {
+		super(image, name, color);
 		this.myPosition = new Point(0, 0);
 		this.color = color;
-	}
-
-	public Piece(String image, Color color, int rank, int file) {
-		super(image);
-		this.myPosition = new Point(rank, file);
-		this.color = color;
+		this.serial = serial;
 	}
 
 	public void moved() {
@@ -58,23 +50,11 @@ public class Piece extends Tile {
 		return this.myPosition;
 	}
 
-	public Color getColor() {
-		return this.color;
-	}
-
-	String generateStringInfo(String pieceKind, Point myPosition) {
-		return pieceKind + serial + ". Rank: " + (myPosition.getRank() + 17) / 2 + ", File: " + (myPosition.getFile() + 1) / 2;
-	}
-
 	public String toString() {
-		// return "Piece instance. Rank: " + (myPosition.getRank() + 17) / 2 +
-		// "File: " + (myPosition.getFile() + 1) / 2;
-		return generateStringInfo("Piece", myPosition);
-
+		return name + serial + ". Rank: " + (myPosition.getRank() + 17) / 2 + ", File: " + (myPosition.getFile() + 1) / 2;
 	}
 
 	public ArrayList<Point> getAvailablePoint() {
-		// 널로 리턴하는게 맞나? 일단 이대로 둬 보자. 구현은 자식 클래스에서 하니까...
 		return null;
 	}
 	

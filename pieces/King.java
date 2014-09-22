@@ -12,13 +12,8 @@ import util.UtilPoint;
 
 public class King extends Piece {
 
-	public King(String image, Color color, int serial) {
-		super(image, color);
-		this.serial = serial;
-	}
-
-	public String toString() {
-		return generateStringInfo("King", myPosition);
+	public King(String image, String name, Color color, int serial) {
+		super(image, name, color, serial);
 	}
 
 	public ArrayList<Point> getAvailablePoint() {

@@ -5,19 +5,15 @@
 package pieces;
 
 import java.util.ArrayList;
+
 import util.UtilEtc.Color;
 import util.Point;
 import util.UtilPoint;
 
 public class Pawn extends Piece {
 
-	public Pawn(String image, Color color, int serial) {
-		super(image, color);
-		this.serial = serial;
-	}
-
-	public String toString() {
-		return generateStringInfo("Pawn", myPosition);
+	public Pawn(String image, String name, Color color, int serial) {
+		super(image, name, color, serial);
 	}
 
 	public ArrayList<Point> getAvailablePoint() {
@@ -27,7 +23,6 @@ public class Pawn extends Piece {
 			pointsIWantToReach.add(new Point(2, 0));
 			if (this.moves == 0)
 				pointsIWantToReach.add(new Point(4, 0));
-
 			// 공격 가능 포인트
 			pointsIWantToAttack.add(new Point(2, -2));
 			pointsIWantToAttack.add(new Point(2, 2));
@@ -36,7 +31,6 @@ public class Pawn extends Piece {
 			pointsIWantToReach.add(new Point(-2, 0));
 			if (this.moves == 0)
 				pointsIWantToReach.add(new Point(-4, 0));
-
 			// 공격 가능 포인트
 			pointsIWantToAttack.add(new Point(-2, -2));
 			pointsIWantToAttack.add(new Point(-2, 2));
