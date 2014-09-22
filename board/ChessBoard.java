@@ -12,6 +12,7 @@ import pieces.King;
 import pieces.Night;
 import pieces.Pawn;
 import pieces.Piece;
+import pieces.Queen;
 import pieces.Rook;
 import pieces.Tile;
 import util.Point;
@@ -42,9 +43,8 @@ public class ChessBoard {
 	Rook bRook1 = new Rook(PieceKind.bRook.getImage(), PieceKind.bRook.getName(), UtilEtc.Color.black, 1);
 	Night bNight1 = new Night(PieceKind.bNight.getImage(), PieceKind.bNight.getName(), UtilEtc.Color.black, 1);
 	Bishop bBishop1 = new Bishop(PieceKind.bBishop.getImage(), PieceKind.bBishop.getName(), UtilEtc.Color.black, 1);
-
 	King bKing = new King(PieceKind.bKing.getImage(), PieceKind.bKing.getName(), UtilEtc.Color.black, 1);
-	
+	Queen bQueen = new Queen(PieceKind.bQueen.getImage(), PieceKind.bQueen.getName(), UtilEtc.Color.black, 1);
 	Bishop bBishop2 = new Bishop(PieceKind.bBishop.getImage(), PieceKind.bBishop.getName(), UtilEtc.Color.black, 2);
 	Night bNight2 = new Night(PieceKind.bNight.getImage(), PieceKind.bNight.getName(), UtilEtc.Color.black, 2);
 	Rook bRook2 = new Rook(PieceKind.bRook.getImage(), PieceKind.bRook.getName(), UtilEtc.Color.black, 2);
@@ -61,9 +61,8 @@ public class ChessBoard {
 	Rook wRook1 = new Rook(PieceKind.wRook.getImage(), PieceKind.wRook.getName(), UtilEtc.Color.white, 1);
 	Night wNight1 = new Night(PieceKind.wNight.getImage(), PieceKind.wNight.getName(), UtilEtc.Color.white, 1);
 	Bishop wBishop1 = new Bishop(PieceKind.wBishop.getImage(), PieceKind.wBishop.getName(), UtilEtc.Color.white, 1);
-	
 	King wKing = new King(PieceKind.wKing.getImage(), PieceKind.wKing.getName(), UtilEtc.Color.white, 1);
-	
+	Queen wQueen = new Queen(PieceKind.wQueen.getImage(), PieceKind.wQueen.getName(), UtilEtc.Color.white, 1);
 	Bishop wBishop2 = new Bishop(PieceKind.wBishop.getImage(), PieceKind.wBishop.getName(), UtilEtc.Color.white, 2);
 	Night wNight2 = new Night(PieceKind.wNight.getImage(), PieceKind.wNight.getName(), UtilEtc.Color.white, 2);
 	Rook wRook2 = new Rook(PieceKind.wRook.getImage(), PieceKind.wRook.getName(), UtilEtc.Color.white, 2);
@@ -91,7 +90,6 @@ public class ChessBoard {
 	}
 
 	private void setupPiececs() {
-
 		putPiece(bPawn1, 7, 1);
 		putPiece(bPawn2, 7, 2);
 		putPiece(bPawn3, 7, 3);
@@ -100,17 +98,16 @@ public class ChessBoard {
 		putPiece(bPawn6, 7, 6);
 		putPiece(bPawn7, 7, 7);
 		putPiece(bPawn8, 7, 8);
-		
+
 		putPiece(bRook1, 8, 1);
 		putPiece(bNight1, 8, 2);
 		putPiece(bBishop1, 8, 3);
 		putPiece(bKing, 8, 4);
-		
+		putPiece(bQueen, 8, 5);
 		putPiece(bBishop1, 8, 6);
 		putPiece(bNight2, 8, 7);
 		putPiece(bRook2, 8, 8);
 
-		
 		putPiece(wPawn1, 2, 1);
 		putPiece(wPawn2, 2, 2);
 		putPiece(wPawn3, 2, 3);
@@ -119,16 +116,15 @@ public class ChessBoard {
 		putPiece(wPawn6, 2, 6);
 		putPiece(wPawn7, 2, 7);
 		putPiece(wPawn8, 2, 8);
-		
+
 		putPiece(wRook1, 1, 1);
 		putPiece(wNight1, 1, 2);
 		putPiece(wBishop1, 1, 3);
 		putPiece(wKing, 1, 4);
-		
+		putPiece(wQueen, 1, 5);
 		putPiece(wBishop2, 1, 6);
 		putPiece(wNight2, 1, 7);
 		putPiece(wRook2, 1, 8);
-
 	}
 
 	private void putPiece(Piece piece, int rank, int file) {
