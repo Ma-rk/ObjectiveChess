@@ -5,12 +5,10 @@
 package pieces;
 
 import java.util.ArrayList;
-
 import util.Point;
-import util.UtilPoint;
 import util.UtilEtc.Color;
 
-public class Night extends Piece{
+public class Night extends TypeJump{
 
 	public Night(String image, String name, Color color, int serial) {
 		super(image, name, color, serial);
@@ -26,7 +24,7 @@ public class Night extends Piece{
 		pointsIWantToGo.add(new Point(2, -4));
 		pointsIWantToGo.add(new Point(-2, -4));
 		pointsIWantToGo.add(new Point(-4, -2));
-		ArrayList<Point> pointsICanGo = UtilPoint.getAvalablePoints(this, pointsIWantToGo);
+		ArrayList<Point> pointsICanGo = getAvalablePoints(this, pointsIWantToGo);
 		return pointsICanGo;
 	}
 }

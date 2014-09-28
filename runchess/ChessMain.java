@@ -2,7 +2,7 @@
  * @createdate: 2014. 9. 13. 
  * @author    : mark_iMac
  */
-package objectChess;
+package runchess;
 
 import pieces.Piece;
 import util.Point;

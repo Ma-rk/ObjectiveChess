@@ -25,7 +25,7 @@ public class Point {
 		return new Point(newRank, newFile);
 	}
 
-	void movePosition(int incrementRank, int incrementFile) {
+	public void movePosition(int incrementRank, int incrementFile) {
 		rank += incrementRank;
 		file += incrementFile;
 	}

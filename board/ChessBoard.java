@@ -5,8 +5,6 @@
 package board;
 
 import java.util.ArrayList;
-
-import objectChess.ChessMain;
 import pieces.Bishop;
 import pieces.King;
 import pieces.Night;
@@ -15,6 +13,7 @@ import pieces.Piece;
 import pieces.Queen;
 import pieces.Rook;
 import pieces.Tile;
+import runchess.ChessMain;
 import util.Point;
 import util.UtilConv;
 import util.UtilEtc;
@@ -98,7 +97,7 @@ public class ChessBoard {
 		putPiece(bPawn6, 7, 6);
 		putPiece(bPawn7, 7, 7);
 		putPiece(bPawn8, 7, 8);
-
+		
 		putPiece(bRook1, 8, 1);
 		putPiece(bNight1, 8, 2);
 		putPiece(bBishop1, 8, 3);
@@ -107,7 +106,7 @@ public class ChessBoard {
 		putPiece(bBishop1, 8, 6);
 		putPiece(bNight2, 8, 7);
 		putPiece(bRook2, 8, 8);
-
+		
 		putPiece(wPawn1, 2, 1);
 		putPiece(wPawn2, 2, 2);
 		putPiece(wPawn3, 2, 3);
@@ -158,16 +157,16 @@ public class ChessBoard {
 	// 이동할 말(자기 말)을 고르는 메소드
 	public Piece pickPieceToMove() {
 		Point positionOfPickedPiece = UtilGetInput.getPosition();
-
+		
 		// 선택한 칸이 빈 칸이면 null 리턴
 		if (chessBoard[positionOfPickedPiece.getRank()][positionOfPickedPiece.getFile()] == null)
 			return null;
+		
 		// 선택한 칸이 타일이면 null 리턴
 		if (chessBoard[positionOfPickedPiece.getRank()][positionOfPickedPiece.getFile()].getClass() == Tile.class)
 			return null;
-
 		Piece piece = (Piece) chessBoard[positionOfPickedPiece.getRank()][positionOfPickedPiece.getFile()];
-
+		
 		// 선택한 칸의 말이 자기게 아니면 널 리턴
 		if (piece.color != ChessMain.curentTurn)
 			return null;
@@ -209,9 +208,6 @@ public class ChessBoard {
 
 		// 현재 말 내부의 좌표값을 이동 후 위치로 바꾼다.
 		currentPiece.setCurrentPosition(pointToMove);
-
-		// 현재 말의 이동 카운트를 1 증가시킨다.
-		currentPiece.moved();
 	}
 
 	public boolean isGameFinished(Color curentTurn) {
@@ -229,5 +225,4 @@ public class ChessBoard {
 		}
 		return true;
 	}
-
 }

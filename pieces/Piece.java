@@ -5,25 +5,19 @@
 package pieces;
 
 import java.util.ArrayList;
-
 import util.Point;
 import util.UtilEtc.Color;
 
 public class Piece extends Tile {
-	// these arrays are for Pawn.
-	ArrayList<Point> pointsIWantToReach = new ArrayList<Point>();
-	ArrayList<Point> pointsICanReach = new ArrayList<Point>();
-	ArrayList<Point> pointsIWantToAttack = new ArrayList<Point>();
-	ArrayList<Point> pointsICanAttack = new ArrayList<Point>();
-	// these are for King, Knight.
+	// for all kind of Pieces.
 	ArrayList<Point> pointsIWantToGo = new ArrayList<Point>();
 	ArrayList<Point> pointsICanGo = new ArrayList<Point>();
-	// these are for Bishop, Rook and Queen
-	ArrayList<Point> directionsIWantToGo = new ArrayList<Point>();
-	ArrayList<Point> directionsICanGo = new ArrayList<Point>();
+	// for only Pawn.
+	ArrayList<Point> pointsIWantToAttack = new ArrayList<Point>();
+	ArrayList<Point> pointsICanAttack = new ArrayList<Point>();
 
 	public Point myPosition;
-	public int moves = 0;
+	public int moves = -1; // this number will be zero when it initialized.
 	public Color color = Color.noColor;
 	public int serial = 0;
 
@@ -34,16 +28,17 @@ public class Piece extends Tile {
 		this.serial = serial;
 	}
 
-	public void moved() {
+	private void moved() {
 		moves++;
 	}
 
 	public void setCurrentPosition(int rank, int file) {
 		this.myPosition = new Point(rank, file);
+		moved();
 	}
 
 	public void setCurrentPosition(Point pos) {
-		this.myPosition = new Point(pos.getRank(), pos.getFile());
+		setCurrentPosition(pos.getRank(), pos.getFile());
 	}
 
 	public Point getCurrentPosition() {
@@ -55,18 +50,13 @@ public class Piece extends Tile {
 	}
 
 	public ArrayList<Point> getAvailablePoints() {
-		// ArrayList<Point> ap = UtilMovement.getAvailablePoint(this);
 		return null;
 	}
 
 	void resetArrays() {
-		pointsIWantToReach = new ArrayList<Point>();
-		pointsICanReach = new ArrayList<Point>();
 		pointsIWantToAttack = new ArrayList<Point>();
 		pointsICanAttack = new ArrayList<Point>();
 		pointsIWantToGo = new ArrayList<Point>();
 		pointsICanGo = new ArrayList<Point>();
-		directionsIWantToGo = new ArrayList<Point>();
-		directionsICanGo = new ArrayList<Point>();
 	}
 }

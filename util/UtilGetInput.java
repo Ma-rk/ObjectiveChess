@@ -7,20 +7,20 @@ package util;
 import java.util.Scanner;
 
 public class UtilGetInput {
-	
 
 	public static Scanner intPicker = new Scanner(System.in);
-	
-	public static Point getPosition(){
-		System.out.println("가로 입력(1~8):");
-		int file = intPicker.nextInt();
-		System.out.println("세로 입력(1~8):");
-		int rank = intPicker.nextInt();
-		
-		rank = UtilConv.convToInnerRank(rank);
-		file = UtilConv.convToInnerFile(file);
-		
+
+	public static Point getPosition() {
+		int coordinate = 0;
+		while (coordinate < 11 || 88 < coordinate) {
+			System.out.println("좌표를 입력하세요:");
+			System.out.println("(가로:세로의 형식으로 11~88의 값을 입력하세요)");
+			coordinate = intPicker.nextInt();
+		}
+
+		int rank = UtilConv.convToInnerRank(coordinate % 10);
+		int file = UtilConv.convToInnerFile(coordinate / 10);
+
 		return new Point(rank, file);
 	}
-
 }
