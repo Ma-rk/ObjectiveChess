@@ -212,6 +212,14 @@ public class ChessBoard {
 
 	public boolean isGameFinished(Color curentTurn) {
 		UtilEtc.printEnterPoint("isGameFinished");
+
+		// deadPieces 어레이에 King이 있으면 게임 종료.
+		for (Piece piece : deadPieces) {
+			if (piece.getClass() == King.class)
+				return true;
+		}
+
+		// 현재 턴이 아닌 게이머의 피스가 하나라도 있으면 게임 계속.
 		Piece cp = null;
 		for (int rank = 1; rank < BOARD_HEIGHT; rank += 2) {
 			for (int file = 1; file < BOARD_WIDTH; file += 2) {
